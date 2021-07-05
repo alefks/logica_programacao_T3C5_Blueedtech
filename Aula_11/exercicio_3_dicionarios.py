@@ -7,12 +7,15 @@
 
 # O programa deverá mostrar para o cliente a quantidade de itens comprados e o total.
 
-produtos = {"batata":5, "leite":10, "Água": 7, "Maçã":0}
+produtos = {"Batata":5, "Leite":10, "Água": 7, "Maçã":0}
 
-escolha = print("1 - Batata\n2 - Leite\n3 - Água\n4 - Maçã\nPesquise um item: ").lower()
+escolha = input("1 - Batata\n2 - Leite\n3 - Água\n4 - Maçã\nPesquise um item: ").lower()
 
-produtos.get(escolha, f"O produto {escolha} não existe!")
+produtos.get(escolha, f"O produto {escolha} é inválido!")
 
-quant_escolha = 0
+quant_escolha = int(input("Digite a quantidade desejada: "))
+
 if escolha in produtos:
     if 
+
+#TERMINAR!!!!!!!!
