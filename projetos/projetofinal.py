@@ -15,6 +15,13 @@ def print_diferente(lista):
             print(f"{i}", end="", flush=True)
             time.sleep(0.3)
 
+# class Personagem:
+#     def __init__(self):
+#         self.malas_arrumadas = False
+#         self.ligacao_namorada = False
+#         self.github_atualizar = False
+
+
 situacao1_cruzeiro = [""]
 #Mensagens com o sleep 0.1
 msgs_slow01 = ["--> Correio Eletrônico: 1 nova mensagem.\n", "\nGustavo: Que email é esse?","\nGustavo: Deixa eu dar uma olhada...\n","\n--> Correio Eletrônico:\nRemetente: Lisboa Tech\nAssunto: Resultado da entrevista de emprego para desenvolvedor sênior.\n\nMensagem: \nParabéns, Gustavo! Seu desempenho durante a entrevista foi excepcional e queremos você na nossa equipe. Iremos mandar sua passagem, e deixamos a seu critério escolher se irá de cruzeiro ou avião.\nEstaremos esperando sua resposta! \n\nGrato, \nCEO da Lisboa Tech.","\n\n\nGustavo: Preciso decidir logo!\n"]
@@ -36,11 +43,15 @@ time.sleep(3)
 
 r = "s"
 dia = 1
-dias_remanescentes = 30 - dia
+dias_remanescentes = 7 - dia
 resp = ""
 
 while r == "s":
     print()
     print(f"Dia {dia}. Você tem ainda tem {dias_remanescentes} dia(s)!")
     print()
+    
     resp = input("Gustavo: Acho que vou escolher...\n\n1 - Cruzeiro\n2 - Avião\n\nResposta (digite 1 ou 2): ")
+    while resp != "1" and resp != "2":
+        resp = input("--> Você digitou algo errado!\n\nGustavo: Acho que vou escolher...\n\n1 - Cruzeiro\n2 - Avião\n\nResposta (digite 1 ou 2): ")
+    
