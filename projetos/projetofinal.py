@@ -9,10 +9,10 @@ def print_diferente(lista):
         for i in lista:
             print(f"{i}", end="", flush=True)
             time.sleep(0.1)
-    elif "Não acredito! Parabéns!" in lista:
+    elif "Não acredito! Parabéns!" in lista[0]:
         for i in lista:
             print(f"{i}", end="", flush=True)
-            time.sleep(0.2)
+            time.sleep(0.1)
     else:
         for i in lista:
             print(f"{i}", end="", flush=True)
@@ -50,7 +50,7 @@ class Cruzeiro(Transporte):
 
 class Tempo:
     def __init__(self):
-        self.__dia = 0
+        self.__dia = 1
         self.__dias_remanescentes = 10
     
     def proximoDia(self):
@@ -63,7 +63,7 @@ class Tempo:
             pass
     
     def printarDia(self):
-        print(f"Você está no dia {self.__dia} e restam {self.__dias_remanescentes - self.__dia} dia(s) remanescentes!")
+        print(f"Você está no dia {self.__dia} e restam {self.__dias_remanescentes - self.__dia} dia(s)!")
     
     @property
     def dia(self): 
@@ -93,61 +93,82 @@ print_diferente(msgs_slow03[1])
 # time.sleep(3)
  
 r = "s"
+x = 0
 tempo = Tempo()
 gustavo = Personagem()
 contar_acoes = 0
 acoes_dia = ["\n\nArrumando as malas...\n\n","\n\nLigando para a Nebulosa...\n\n","\n\nAtualizando o GitHub...\n\n"]
 ligacao_nebulosa = ["A Nebulosa atendeu!","A Nebulosa não atendeu!"]
-respostas_nebulosa = [["Não acredito! Parabéns!","Fico muito feliz por você, mas tenho que desligar agora.","Amanhã nos vemos!"], []]
+respostas_nebulosa = [["Não acredito! Parabéns!","Fico muito feliz por você, mas tenho que desligar agora.","Amanhã nos vemos!"], ['VAI VENDER CURSO!!','TA BÊBADO CARA!!']]
 
-tempo.printarDia()
 print()
+tempo.printarDia()
 resp = input("\n\nGustavo: Acho que vou escolher...\n\n1 - Cruzeiro\n2 - Avião\n\nResposta (digite 1 ou 2): ")
 
 while resp != "1" and resp != "2":
         resp = input("\n\n- Você digitou algo errado!\n\nGustavo: Acho que vou escolher...\n\n1 - Cruzeiro\n2 - Avião\n\nResposta (1/2): ")
 
 if resp == "1":
-    print("\n\nCerto, então você irá de cruzeiro para Portugal!\n\n")
-    while r == "s":
-        resp_opcoesdia = input("Opções para fazer hoje:\n1 - Arrumar as malas\n2 - Ligar para a Nebulosa (apelido da parceira conjugal do herói)\n3 - Atualizar o GitHub\n\nResposta (1/2/3): ")
+    print("\n\nCerto, então você irá de cruzeiro para Portugal!")
+    situacao_escolhida = "cruzeiro"
 
-        while resp_opcoesdia != "1" and resp_opcoesdia != "2" and resp_opcoesdia != "3":
-            resp_opcoesdia = input("\n\n- Você digitou algo errado!\n\nOpções para fazer hoje:\n1 - Arrumar malas\n2 - Ligar para a Nebulosa (apelido da parceira conjugal do herói)\n3 - Atualizar o GitHub\n\nResposta (1/2/3): ")
+if resp == "2":
+    print("\n\nCerto, então você irá de avião para Portugal!")
+    situacao_escolhida = "aviao"
 
-        if contar_acoes < 3:
-            if resp_opcoesdia == "1":
-                
-                if gustavo.malas_arrumadas == True:
-                    print("\n\nSuas malas já estão arrumadas!\n\n")
-                    pass
-                else:
-                    print_diferente(acoes_dia[0])
-                    gustavo.arrumarMalas()
-                    contar_acoes+=1
-                    print("Pronto, malas arrumadas!\n\n")
+while r == "s":
+    print()
+    resp_opcoesdia = input("\nOpções para fazer hoje:\n1 - Arrumar as malas\n2 - Ligar para a Nebulosa (apelido da parceira conjugal do herói)\n3 - Atualizar o GitHub\n\nResposta (1/2/3): ")
+
+    while resp_opcoesdia != "1" and resp_opcoesdia != "2" and resp_opcoesdia != "3":
+        resp_opcoesdia = input("\n\n- Você digitou algo errado!\n\nOpções para fazer hoje:\n1 - Arrumar malas\n2 - Ligar para a Nebulosa (apelido da parceira conjugal do herói)\n3 - Atualizar o GitHub\n\nResposta (1/2/3): ")
+
+    if contar_acoes < 3:
+        if resp_opcoesdia == "1":
             
-            if resp_opcoesdia == "2":
-                print_diferente(acoes_dia[1])
-                confirma_nebulosa = random.choice(ligacao_nebulosa)
+            if gustavo.malas_arrumadas == True:
+                print("\n\nSuas malas já estão arrumadas!\n\n")
+                pass
+            else:
+                print_diferente(acoes_dia[0])
+                gustavo.arrumarMalas()
+                contar_acoes+=1
+                print("Pronto, malas arrumadas!\n\n")
+        
+        if resp_opcoesdia == "2":
+            print_diferente(acoes_dia[1])
+            confirma_nebulosa = random.choice(ligacao_nebulosa)
 
-                if "não atendeu!" in confirma_nebulosa:
-                    print(confirma_nebulosa)
-                    print()
-                else:
-                    print(confirma_nebulosa)
-                    print()
-                    gustavo.ligarNamorada()
-                    
-                    resp_nebulosa = input("1 - Contar que passou na entrevista e irá para Portugal\n2 - Falar que desistiu da carreira de Desenvolvedor Sênior e agora vai virar influencer e gravar dancinha para o TikTok\n\nResposta (1/2): ")
-                    
-                    while resp_nebulosa != "1" and resp_nebulosa != "2":
-                        resp_nebulosa = input("- Você digitou algo errado!\n\n1 - Contar que passou na entrevista e irá para Portugal\n2 - Falar que desistiu da carreira de Desenvolvedor Sênior e agora vai virar influencer e gravar dancinha para o TikTok\n\nResposta (1/2): ")
-                    
-                    if resp_nebulosa == "1":
-                        print_diferente(f"\n\nNebulosa: {respostas_nebulosa[0][0]}\n")
-                        time.sleep(1)
-                        print_diferente(f"Nebulosa: {respostas_nebulosa[0][1]}\n")
-                        time.sleep(1)
-                        print_diferente(f"Nebulosa: {respostas_nebulosa[0][2]}\n\n")
-                        time.sleep(1)
+            if "não atendeu!" in confirma_nebulosa:
+                print(confirma_nebulosa)
+                print()
+            else:
+                print(confirma_nebulosa)
+                print()
+                gustavo.ligarNamorada()
+                contar_acoes+=1
+                
+                resp_nebulosa = input("1 - Contar que passou na entrevista e irá para Portugal\n2 - Falar que desistiu da carreira de Desenvolvedor Sênior e agora vai virar influencer e gravar dancinha para o TikTok\n\nResposta (1/2): ")
+                
+                while resp_nebulosa != "1" and resp_nebulosa != "2":
+                    resp_nebulosa = input("- Você digitou algo errado!\n\n1 - Contar que passou na entrevista e irá para Portugal\n2 - Falar que desistiu da carreira de Desenvolvedor Sênior e agora vai virar influencer e gravar dancinha para o TikTok\n\nResposta (1/2): ")
+                
+                if resp_nebulosa == "1":
+                    for i in range(3):
+                        print_diferente(f"\nNebulosa: {respostas_nebulosa[0][i]}")
+                
+                if resp_nebulosa == "2":
+                    for i in range(2):
+                        print_diferente(f'\nNebulosa: {respostas_nebulosa[1][i]}')
+                
+        if resp_opcoesdia == "3":
+            if gustavo.github_atualizar == True:
+                print("\n\nSeu GitHub já está atualizado!\n\n")
+            else:
+                print_diferente(acoes_dia[2])
+                gustavo.githubAtualizar()
+                print("\n\nGitHub atualizado com sucesso!\n\n")
+                contar_acoes+=1
+    
+        elif contar_acoes == 3:
+            r = "a"
