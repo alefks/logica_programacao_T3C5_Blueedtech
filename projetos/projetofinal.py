@@ -1,7 +1,5 @@
 # Projeto final - As aventuras de Gustavo na Europa
-
 import time
-import sys
 import random
 
 def print_diferente(lista):
@@ -9,7 +7,7 @@ def print_diferente(lista):
         for i in lista:
             print(f"{i}", end="", flush=True)
             time.sleep(0.1)
-    elif "Não acredito! Parabéns!" in lista[0]:
+    elif "Não acredito! Parabéns!" in lista:
         for i in lista:
             print(f"{i}", end="", flush=True)
             time.sleep(0.1)
@@ -42,11 +40,11 @@ class Transporte:
 
 class Aviao(Transporte):
     def printarTransporte(self):
-        print("Você está viajando na companhia aérea Fly Emirates. A vista aérea é incrível!")
+        print("Você viajou na companhia aérea Fly Emirates. A vista aérea é incrível!")
         
 class Cruzeiro(Transporte):
     def printarTransporte(self):
-        print("Você está viajando no MSC Cruzeiros Portugal, com uma vista linda do mar!")
+        print("Você viajou no MSC Cruzeiros Portugal, com uma vista linda do mar!")
 
 class Tempo:
     def __init__(self):
@@ -73,7 +71,6 @@ class Tempo:
     def dia(self, alterar_dia): 
         raise ValueError("Impossivel alterar o dia diretamente. O usuário deve, necessariamente, iniciar do 1° dia.")
 
-situacao1_cruzeiro = [""]
 #Mensagens com o sleep 0.1
 msgs_slow01 = ["--> Correio Eletrônico: 1 nova mensagem.\n", "\nGustavo: Que email é esse?","\nGustavo: Deixa eu dar uma olhada...\n","\n--> Correio Eletrônico:\nRemetente: Lisboa Tech\nAssunto: Resultado da entrevista de emprego para desenvolvedor sênior.\n\nMensagem: \nParabéns, Gustavo! Seu desempenho durante a entrevista foi excepcional e queremos você na nossa equipe. Iremos mandar sua passagem, e deixamos a seu critério escolher se irá de cruzeiro ou avião.\nEstaremos aguardando sua resposta! \n\nGrato, \nCEO da Lisboa Tech.","\n\n\nGustavo: Preciso decidir logo!\n"]
 #Mensagens com o sleep 0.3
@@ -93,24 +90,25 @@ print_diferente(msgs_slow03[1])
 # time.sleep(3)
  
 r = "s"
-x = 0
 tempo = Tempo()
 gustavo = Personagem()
+aviao = Aviao()
 contar_acoes = 0
 acoes_dia = ["\n\nArrumando as malas...\n\n","\n\nLigando para a Nebulosa...\n\n","\n\nAtualizando o GitHub...\n\n"]
 ligacao_nebulosa = ["A Nebulosa atendeu!","A Nebulosa não atendeu!"]
-respostas_nebulosa = [["Não acredito! Parabéns!","Fico muito feliz por você, mas tenho que desligar agora.","Amanhã nos vemos!"], ['VAI VENDER CURSO!!','TA BÊBADO CARA!!']]
+respostas_nebulosa = [["Não acredito! Parabéns!","Fico muito feliz por você, mas tenho que desligar agora.","Amanhã nos vemos!\n\n"], ['VAI VENDER CURSO!!','TA BÊBADO CARA!!\n\n']]
+situacoes_aviao = [["sucesso","terrorista"], ["venceu", "perdeu"]]
 
 print()
 tempo.printarDia()
-resp = input("\n\nGustavo: Acho que vou escolher...\n\n1 - Cruzeiro\n2 - Avião\n\nResposta (digite 1 ou 2): ")
+resp = input("\n\nGustavo: Acho que vou escolher...\n\n2 - Avião\n\nResposta (2): ")
 
-while resp != "1" and resp != "2":
-        resp = input("\n\n- Você digitou algo errado!\n\nGustavo: Acho que vou escolher...\n\n1 - Cruzeiro\n2 - Avião\n\nResposta (1/2): ")
+while resp != "2":
+        resp = input("\n\n- Você digitou algo errado!\n\nGustavo: Acho que vou escolher...\n\n2 - Avião\n\nResposta (2): ")
 
-if resp == "1":
-    print("\n\nCerto, então você irá de cruzeiro para Portugal!")
-    situacao_escolhida = "cruzeiro"
+# if resp == "1":
+#     print("\n\nCerto, então você irá de cruzeiro para Portugal!")
+#     situacao_escolhida = "cruzeiro"
 
 if resp == "2":
     print("\n\nCerto, então você irá de avião para Portugal!")
@@ -123,7 +121,7 @@ while r == "s":
     while resp_opcoesdia != "1" and resp_opcoesdia != "2" and resp_opcoesdia != "3":
         resp_opcoesdia = input("\n\n- Você digitou algo errado!\n\nOpções para fazer hoje:\n1 - Arrumar malas\n2 - Ligar para a Nebulosa (apelido da parceira conjugal do herói)\n3 - Atualizar o GitHub\n\nResposta (1/2/3): ")
 
-    if contar_acoes < 3:
+    if contar_acoes <= 3:
         if resp_opcoesdia == "1":
             
             if gustavo.malas_arrumadas == True:
@@ -134,7 +132,7 @@ while r == "s":
                 gustavo.arrumarMalas()
                 contar_acoes+=1
                 print("Pronto, malas arrumadas!\n\n")
-        
+
         if resp_opcoesdia == "2":
             print_diferente(acoes_dia[1])
             confirma_nebulosa = random.choice(ligacao_nebulosa)
@@ -160,9 +158,9 @@ while r == "s":
                 if resp_nebulosa == "2":
                     for i in range(2):
                         print_diferente(f'\nNebulosa: {respostas_nebulosa[1][i]}')
-                
+
         if resp_opcoesdia == "3":
-            if gustavo.github_atualizar == True:
+            if gustavo.github_atualizar == True:                         
                 print("\n\nSeu GitHub já está atualizado!\n\n")
             else:
                 print_diferente(acoes_dia[2])
@@ -170,5 +168,18 @@ while r == "s":
                 print("\n\nGitHub atualizado com sucesso!\n\n")
                 contar_acoes+=1
     
-        elif contar_acoes == 3:
+        if contar_acoes >= 3:
             r = "a"
+
+if situacao_escolhida == "aviao":
+    terrorista_aviao = random.choice(situacoes_aviao[0])
+
+    if terrorista_aviao == "terrorista":
+        resp_terrorista = input("\nTem um terrorista no avião! Para desbloquear a bomba, digite a senha (dica: salário do Gustavo)\nResposta:  ")
+        while resp_terrorista != "10k":
+            resp_terrorista = input("Você errou a senha!\n\nTem um terrorista no avião! Para desarmar a bomba, digite a senha (dica: salário do Gustavo com 'k' no final)\nResposta: ")
+        
+        print("\n\nParabéns, você salvou o macbook do Gustavo!")
+    else:
+        aviao.printarTransporte()
+        print("\n\nPiloto: Durante o embarque foi detido um terrorista!\nGustavo: Graazadeus meu macbook tá inteiro!")
